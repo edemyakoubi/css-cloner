@@ -125,12 +125,16 @@ def lookup_element_css(
     for cls in classes:
         if cls:  # skip empty
             selector = "." + cls
-            temp = css_df[css_df["Selector/Element"].str.contains(selector, na=False)]
+            temp = css_df[
+                css_df["Selector/Element"].str.contains(selector, na=False, regex=False)
+            ]
             if not temp.empty:
                 matches = pd.concat([matches, temp], ignore_index=True)
 
     # 2. Also search by tag name itself
-    temp2 = css_df[css_df["Selector/Element"].str.contains(element_choice, na=False)]
+    temp2 = css_df[
+        css_df["Selector/Element"].str.contains(element_choice, na=False, regex=False)
+    ]
     if not temp2.empty:
         matches = pd.concat([matches, temp2], ignore_index=True)
 
@@ -170,7 +174,9 @@ def batch_lookup_css(
         # Search for each class in CSS sheet
         for cls in classes:
             selector = "." + cls.strip()
-            temp = css_df[css_df["Selector/Element"].str.contains(selector, na=False)]
+            temp = css_df[
+                css_df["Selector/Element"].str.contains(selector, na=False, regex=False)
+            ]
             if not temp.empty:
                 matches = pd.concat([matches, temp], ignore_index=True)
 
