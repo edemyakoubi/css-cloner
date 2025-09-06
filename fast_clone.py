@@ -11,8 +11,8 @@ keywords = ["font", "color", "bg", "background", "button", "btn"]
 filtered_rows = []
 
 for i, row in css_df.iterrows():
-    prop = row["Property"].lower()
-    selector = row["Selector/Element"].lower()
+    prop = str(row["Property"]).lower()
+    selector = str(row["Selector/Element"]).lower()
     for kw in keywords:
         if kw in prop or kw in selector:
             filtered_rows.append(row)
